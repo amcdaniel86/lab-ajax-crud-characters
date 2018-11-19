@@ -1,23 +1,27 @@
-const charactersAPI = new APIHandler("http://localhost:8000")
 
-$(document).ready( () => {
-  document.getElementById('fetch-all').onclick = function(){
+function fetchAll(){
+  axios.get('https://ih-crud-api.herokuapp.com/characters')
+    .then((response)=>{
+        $('.character-info').html("<ul id='list'></ul>)
+        response.data.forEach((eachCharacter)=>{
 
-  }
+          $('#list').append(`
+          <li>    
+          name: ${eachCharacter.name}
+          occupation: ${eachCharacter.occupation}
+          weapon: ${eachCharacter.weapon}
+          debt: ${eachCharacter.debt}
+          </li>
+          `)
+        }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+}
+
+  $('#fetch-all').click(fetchAll);
+
+  // alternative versions
+
   
-  document.getElementById('fetch-one').onclick = function(){
-    
-  }
-  
-  document.getElementById('delete-one').onclick = function(){
-        
-  }
-  
-  document.getElementById('edit-character-form').onsubmit = function(){
-            
-  }
-  
-  document.getElementById('new-character-form').onsubmit = function(){
-                
-  }
-})
